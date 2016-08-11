@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "511100844903",
+    "firebase_url": "https://snapcat-c4c6a.firebaseio.com",
+    "project_id": "snapcat-c4c6a",
+    "storage_bucket": "snapcat-c4c6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511100844903:android:a720d3ad3f0c70b4",
+        "android_client_info": {
+          "package_name": "com.beardsmcgee.snapcat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511100844903-6sfvjdcpn51c68h75vjer53avp5310s4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDesOyHqyHbm-nOWf6ouVnc7E5bw3InYOc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

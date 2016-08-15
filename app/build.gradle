@@ -25,9 +25,12 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.1.1'
     compile 'com.android.support:support-v4:24.1.1'
 
+    //Play services
+    compile 'com.google.android.gms:play-services-auth:9.4.0'
+
     //Firebase
     compile 'com.google.firebase:firebase-auth:9.4.0'
-    compile 'com.google.android.gms:play-services-auth:9.4.0'
+    compile 'com.google.firebase:firebase-database:9.4.0'
 
     //Glide
     compile 'com.github.bumptech.glide:glide:3.5.2'

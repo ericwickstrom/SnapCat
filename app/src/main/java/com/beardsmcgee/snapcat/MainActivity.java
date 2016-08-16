@@ -12,9 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -42,6 +44,10 @@ public class MainActivity extends AppCompatActivity
     private ImageView photoImageView;
     private EditText editText;
     private Button mSignInButton;
+    private ListView mListView;
+
+    //adapters
+    FirebaseListAdapter<Post> mAdapter;
 
     //temp  todo: delete this
     int count = 0;
@@ -55,9 +61,11 @@ public class MainActivity extends AppCompatActivity
         nameTextView = (TextView) findViewById(R.id.mainActivityNameTV);
         photoImageView = (ImageView) findViewById(R.id.mainActivityPhotoIv);
         editText = (EditText) findViewById(R.id.mainActivityEditTV);
-        mSignInButton = (Button) findViewById(R.id.mainActivitySubmitButton);
 
+        mSignInButton = (Button) findViewById(R.id.mainActivitySubmitButton);
         mSignInButton.setOnClickListener(this);
+
+        mListView = (ListView) findViewById(R.id.mainActivityListView);
 
         //GoogleApiClient
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -94,6 +102,16 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_POSTS);
+
+        mAdapter = new FirebaseListAdapter<Post>(this, Post.class, android.R.layout.two_line_list_item, ref) {
+            @Override
+            protected void populateView(View v, Post model, int position) {
+                ((TextView) v.findViewById(android.R.id.text1)).setText(model.getUserId());
+                ((TextView) v.findViewById(android.R.id.text2)).setText(model.getPost());
+            }
+        };
+        mListView.setAdapter(mAdapter);
     }
 
     @Override
@@ -129,8 +147,8 @@ public class MainActivity extends AppCompatActivity
         switch(view.getId()){
             case R.id.mainActivitySubmitButton:
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_POSTS);
-                ref.setValue(editText.getText().toString());
-                Log.i("SnapCat", "New Post:" + ref.getKey());
+                ref.push().setValue(new Post(mFirebaseUser.getUid(), editText.getText().toString()));
+
                 editText.setText("");
                 break;
         }
